@@ -1,2 +1,5 @@
 # 421-Lab-Notes
-Notes for lab for Econometrics 421
+
+Here is where you can see the lab notes for Econometrics, EC421 for Spring 2019. I'll periodically update these after class on Thursdays.
+
+Lab 1: Learning R
