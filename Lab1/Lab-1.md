@@ -14,7 +14,7 @@ output:
 
 
 
-##Introduction: 
+## Introduction: 
 
 Hi everybody, my name is Connor and I will be helping you with Economics 421! 
 
