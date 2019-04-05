@@ -1,0 +1,399 @@
+---
+Title: Let's Learn R
+date: Lab 1 #"`r format(Sys.time(), '%d %B %Y')`"
+output: 
+  html_document:
+    theme: flatly
+    highlight: haddock 
+    # code_folding: show
+    toc: yes
+    toc_depth: 4
+    toc_float: yes
+    keep_md: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, cache = TRUE, dpi=300)
+```
+
+##Introduction: 
+
+Hi everybody, my name is Connor and I will be helping you get through 421! 
+
+We're going to start with a walkthrough of R.
+
+
+## Lesson 0: Basics
+In general:
+
+- We will be working with what is called a *script*. This is similar to a do file in Stata. It's basically your workspace. 
+- To execute a script, hit cmd+return (control+enter if on PC.) To save the script, cmd+s. There are other shortcuts as well. If you want to run a specific line, then you can move your cursor to that line and hit cmd+return and the R script will only run that one line.
+- R uses *functions*, which we apply to *objects*. More on this shortly, but if you aren't sure what a function does, or how it works, you can use ? before the function to get the documentation. Ex:
+
+```{R, help!}
+?mean
+```
+
+As a note, these grey boxes will be where I am typing my code for you to reference.
+
+There are a ton of different types of objects (numeric (numbers), character (letters) and logical (true false statements) are the most common types), and not all functions will work on all objects. Let's talk a bit about objects.
+
+# Lesson 1: All things are objects
+
+An object is an assignment between a name and a value. You assign values to names using `<-` or `=`. The first assignment symbol consists of a `<` next to a dash `-` to make it look like an arrow. 
+
+If we want to make an object name 'a' refer to the number '2', we can do that by:
+
+```{R, a}
+a <- 2
+# a = 2
+a
+```
+
+Note: The `#` comments out code meaning R will not evaluate the code. This is a convenient way to write yourself notes as you're coding.
+
+You can combine objects together as well, assigning 
+
+```{R, bc}
+#assign the value of 3 to the name b
+b <- 3
+#assign the value of b (3) plus the value of a (2), to a new name, c.
+c <- a + b
+#display c
+c
+```
+
+When you wrap parentheses around an assignment, R will both (1) assign the value to the name and (2) print out the value (to the screen) that you've assigned.
+
+```{R, d}
+#let's print two lines. Parentheses will print this
+(d <- c * 3)
+#R-markdown, what this is written in, will automatically output the last line of a cell.
+d + 3 - 1 + c
+```
+
+Objects can also contain more than one value. What do you think the object 1:10 does?
+
+```{R, sequence}
+(tmp <- 1:10)
+```
+This displays a sequence of integers (whole numbers), going from the first value to the last one, ie, 9:10 will return 9 10.
+
+One common way (illustrated above) to store multiple values is via a `vector`.
+
+
+# Lesson 2: Functions
+
+Functions are operations you can apply to your created object.
+
+Examples: `head`, `tail`, `mean`, `median`, `sd`, `summary`, `min`, `max`
+
+These functions are good at summarizing data in a variety of ways. Let's see how they work
+
+```{R, functions}
+#print the first few objects in 'tmp'
+head(tmp)
+#print the first 3 objects in 'tmp'
+head(tmp, 3)
+#print the last few objects in 'tmp'
+tail(tmp)
+```
+
+```{R, summary functions}
+#mean of our vector tmp
+mean(tmp)
+#median of our vector
+median(tmp)
+#standard deviation of our vector
+sd(tmp)
+#*IMPORTANT* Print a summary of our object. This can work on many object types and is useful to get an overview
+summary(tmp)
+#Print minimum of the vector
+min(tmp)
+#print max of a vector
+max(tmp)
+```
+
+One caveat: what do you think will happen when I run the following?
+
+```{r}
+#Let's make a bad vector
+bad <- c(tmp, "red", "dinosaurs", NULL)
+(tail(bad, 4))
+(tail(tmp, 4))
+```
+Aside from the last three objects, do these two sets look different to you? We'll get back to this.
+
+**Mathematical operators**
+
+We can also use R to do anything you could do in a calculator, that is, multiply, divide, and so forth. Most of these are self explanatory
+
+```{R, math operators}
+#add
+11 + 2
+#subtract
+11 - 2
+#multiply
+11 * 2
+#divide
+11 / 2
+#Find remainder (this is surprisingly useful)
+(11 %% 2)
+#Find integer division, ie, how many times does 2 fit into 11 as a whole number
+11 %/% 2
+#Power
+11 ^ 2
+```
+
+Functions create objects, e.g., `c()` creates vectors of values for individual objects' values.
+
+```{R, vector}
+vec_a <- c(1, 5, 8, 20)
+vec_a
+```
+
+You can also apply mathematical operators to vectors.
+
+```{R, math vectors}
+vec_a * 2
+vec_a ^ 2
+vec_a - vec_a
+```
+
+Finally, keep track of missing values (`NA`) and infinity (`Inf`)!
+
+```{R, NAs}
+# Division by NA
+vec_a / NA
+# Division by zero. This creates a special value in R called 'inf'
+vec_a / 0
+```
+
+# Lesson 2: Types of Objects
+
+So far, you've seen `numeric` objects (which can be `numeric` or `integer`). We can see what kind of class an object is by using the `class()` function.
+
+```{R, numeric}
+(class(a))
+(class(tmp))
+(class(vec_a))
+```
+
+
+Another common class of objects is `character`:
+
+```{R, text}
+#Let's create a character object. These are surrounded by either "" or ''. This distinguishes them from object names
+(some_text <- "I have a birthday, but it is not today.")
+class(some_text)
+```
+
+Lastly, we have `logical` objects. 
+
+Logical objects are essentially anything you could classify as a true/false statement, like, the sky is purple = FALSE. Caustic is the best legend = FALSE.
+
+```{R, logical}
+#These generally use the characters less than (<), greater than (>), or is equivalent (==)
+(2 < 3)
+(2 > 3)
+(2 == 3)
+(TRUE == TRUE)
+class(TRUE)
+```
+
+```{r}
+#We can also do this with vectors. This will compare each element in the vector to check your provided condition.
+c(1,2,3,4,5) < c(2,0,1,2,3)
+```
+
+which have some special operators
+
+```{R, logical operators}
+# AND
+TRUE & FALSE
+# OR
+TRUE | FALSE
+```
+Be careful. Vectors only hold 1 type of object, let's look at our vector 'bad' again.
+
+```{r}
+class(bad)
+```
+
+Why is it a character now? Well, R is trying to help us. By adding some words to the end of the vector, R will automatically transform the entire vector to a character class. We can however, store multiple types of values by using special data types.
+
+In particular, you guys will be working with data frames and tibbles. We can create a data frame with the `data.frame()` function, passing it three *arguments* that are *vectors.* Let's see how that works:
+
+```{R, data frames}
+our_df <- data.frame(
+  v1 = 1:4,
+  v2 = c(T, T, F, T),
+  v3 = c("a", "b", "c", "d")
+)
+our_df
+```
+
+You can think about data frames (`data.frame`) as spreadsheets, each column as a new variable, and each row has a new observation. We'll generally read data into R as a data frame.
+
+# Lesson 3: Load Packages
+
+Base R (what comes installed on your computer) is an incredibly powerful programming language, but one of the best features of R are its packages, which are remotely stored functions written by anybody. You could even write a package if you wanted! This open source nature allows R to be extremely flexible. For now, we will load the `pacman` package management package, and then the `ISLR` package which has a number of datasets.
+
+Let's start by loading packages. Uncomment the install.packages function to get the pacman package to install. If you already have some of these packages, feel free to delete lines. The install.packages function can take a vector of package names, as characters, to install all of the above.
+```{R, pacman}
+install.packages(c("pacman","ISLR", "ggplot2"), dependencies=T, repos = "http://cran.us.r-project.org")
+#pacman will allow us to load packages intelligently. Load it with the library() function
+library(pacman)
+#p_load is pacman's 'library' and features a number of improvements. Load next two packages.
+p_load(ISLR, ggplot2)
+```
+You can also do all of this in base R, but it's not as efficient.
+```{R, not efficient}
+#the following code does the same thing. Not as good. More packages you have, the more convinient pacman becomes.
+install.packages(c("ISLR","ggplot2"),dependencies = T, repos="http://cran.us.r-project.org")
+library(ISLR)
+library(ggplot2)
+```
+
+# Lesson 4: More about data frames
+
+We installed and loaded `ISLR` because it has a nice dataset for learning about data frames: `Auto` (you may have seen this one before...).
+
+Let's spend some time familiarizing ourselves with the dataset. We can use many of the familiar tools we had before, namely `head()`, `tail()`, and `summary()`.
+
+If we want to look at a specific column of a dataframe, we can do this by writing `dataframe$columnName`
+
+```{R, Auto}
+#I always like to get a summary of my data before doing much of anything
+(summary(Auto))
+#Let's call a specific column
+(Auto$cylinders)
+#Look at the first few rows of our dataframe
+(head(Auto))
+#look at the last few rows of our dataframe
+(tail(Auto))
+```
+
+**Indexing**
+
+We can also call columns and rows by their numeric 'index.' This is a numerical value that R holds onto as a reference point. As a note for computer-saavy readers: r begins indexing at 1. Let's see what this looks like:
+
+```{R, indexing}
+#Here's our first column
+Auto$cylinders
+#If we want the first element of that column, we can do that this way:
+(Auto$cylinders[1])
+
+#we can also grab elements, say 1-10 in an array:
+(Auto$cylinders[1:10])
+
+#what about matrices?
+(head(Auto))
+#row 2, column 1. just like matrix dimensions. row by col.
+(Auto[2,1])
+
+#We can also grab slices of a dataframe, by passing the index a series of integers. Let's look at the second and third rows, and the third and fourth columns.
+Auto[2:3,3:4]
+```
+
+
+We can also use a few new summary functions to get some basic information out of our dataframe:
+```{R, rows, cols, etc}
+#Number of rows
+(nrow(Auto))
+#Number of columns
+(ncol(Auto))
+#Dimensions of the DF
+dim(Auto)
+```
+
+
+# Lesson 5: Plotting
+
+One of the most useful things in R is the myriad of ways it can visualize data in an appealing way. Let's dive in. The `plot(x,y)` function will produce a scatterplot,
+
+```{r}
+#plot(x,y)
+plot(Auto$mpg, Auto$acceleration)
+```
+
+Okay, maybe I didn't start out on the best foot. That's not the prettiest thing in the world. Let's try again.
+
+```{r}
+#First lets figure out what acceleration is: we can look at datasets if they have documentation
+?Auto
+#Now lets make our graph look a bit better
+#Col will set a color, xlab will label the x-axis, ylab will label the y-axis, and pch is how plot changes dot shapes.
+plot(Auto$mpg, Auto$acceleration, xlab="Miles per Gallon",
+     ylab= "Acceleration", main="A Scatterplot",col="red",
+     pch=20 )
+
+```
+
+
+We can also plot a histogram
+
+```{R, Histogram}
+hist(Auto$mpg,main= "Histogram of Miles per Gallon", xlab= "MPG", ylab="Frequency", col = "orange")
+```
+
+
+# Lesson 6: Regression
+
+What you guys came here for! Lots of regression. Regression is fairly straightforward if you are familiar with Stata.
+
+We have a new function, `lm()`, and a new object type, called a `formula`. If we want to run a regression: $Y = \beta*X + \varepsilon$ we have to pass the lm function something it can use to know what to do. We do this with the `y ~ x1 + x2...` format. 
+  
+```{R, OLS}
+#create an object w regression. lm for "linear model"
+new_reg = lm(mpg ~ weight, data = Auto)
+#and we can use the summary object to get a view very similar to Stata's
+summary(new_reg)
+```
+  
+Also, we can run regressions without defining a dataset.
+```{R, OLS 1.5}
+#We don't NEED to pass a dataset, but we need to tell lm where to find the information. We can do that this way as well. 
+summary(lm(Auto$mpg ~ Auto$weight))
+```
+  
+On your own, interpret these coefficients? What do these mean?
+  
+```{R, OLS, 2}
+#Let's do another regression. This time, looking at the effect of origin on miles per gallon.
+origin_reg <- lm(mpg ~ origin, data = Auto)
+summary(origin_reg)
+```
+  
+Notice that `origin` variable is coded as numeric, but it really is a categorical varialbe (1 = American, 2 = European, 3 = Japanese). R doesn't know this, so it's treating it as if '3' is 3 times as origin-y as '1'. We don't want that.
+
+```{r}
+#R is treating origin as a...
+(class(Auto$origin))
+#To visualize...
+hist(Auto$origin,main= "Histogram of Origin", xlab= "Origin", ylab="frequency")
+```
+  
+There's a way to fix this, by redefining `Auto$origin` using the `as.character()` function.
+
+```{R, OLS 3}
+origin_reg <- lm(mpg ~ as.character(origin), data = Auto)
+summary(origin_reg)
+```
+
+When `lm()` sees a character value, it will automatically treat that variable as a dummy variable. Now, origin is equal to "1" rather than 1.
+
+As an aside, and to test your memory: what is the interpretation of the intercept here?
+
+If we wanted, we could also remove the intercept. This might give you a hint to the question above:
+```{r}
+#remove the intercept: we can do this by adding a '-1' into our formula.
+origin_reg_no_int <- lm(mpg ~ as.character(origin)-1, data = Auto)
+summary(origin_reg_no_int)
+```
+
+And that's it! Welcome to R. Please feel free to play around with the datasets and get comfortable slicing dataframes, since you will likely be doing that often.
+
+As practice, play around running regressions in the `ISLR` 'College' dataset. Run a regression on your own, and try to look at entire rows or entire columns to familiarize yourself with R.
+
+Good luck, and I'll see you next week.
