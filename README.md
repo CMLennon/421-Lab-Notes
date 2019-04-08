@@ -12,3 +12,5 @@ Here is where you can see the lab notes for Econometrics, EC421 for Spring 2019.
 Lab 1: [Learning R: Introduction](https://github.com/CMLennon/421-Lab-Notes/blob/master/Lab1/Lab-1.md)
 
 Lab 2: Learning R: Enter the Tidyverse
+
+A note: I owe a great debt of gratitude to John Morehouse, Alex Li, and of course Ed Rubin for laying the foundations of the lab work for me to build notes off of.
