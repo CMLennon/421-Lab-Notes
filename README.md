@@ -2,7 +2,7 @@
 
 Some Useful Resources:
 
-[Getting Started With R](https://support.rstudio.com/hc/en-us/articles/201141096-Getting-Started-with-R)
+[Getting Started With R](https://cran.r-project.org/doc/contrib/Paradis-rdebuts_en.pdf)
 
 [Tidyr cheatsheet](https://github.com/rstudio/cheatsheets/blob/master/data-import.pdf)
 
