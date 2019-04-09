@@ -9,7 +9,8 @@ Some Useful Resources:
 
 Here is where you can see the lab notes for Econometrics, EC421 for Spring 2019. I'll periodically update these after class on Thursdays.
 
-Lab 1: [Learning R: Introduction](https://github.com/CMLennon/421-Lab-Notes/blob/master/Lab1/Lab-1.md) (Objects, Functions, Mathematical Operators, Dataframes, Regression, Basic Plots)
+Lab 1: [Learning R: Introduction](https://github.com/CMLennon/421-Lab-Notes/blob/master/Lab1/Lab-1.md) 
+- (Objects, Functions, Mathematical Operators, Dataframes, Regression, Basic Plots)
 
 Lab 2: Learning R: Enter the Tidyverse
 
