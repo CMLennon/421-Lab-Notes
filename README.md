@@ -16,5 +16,6 @@ Some Useful Resources:
 - Objects, Functions, Mathematical Operators, Dataframes, Regression, Basic Plots
 
 **Lab 2**: Learning R: Enter the Tidyverse
+- Loading your own CSVs into R, dplyr commands (mutate, summarise, filter etc.), qplot
 
 A note: I owe a great debt of gratitude to John Morehouse, Alex Li, and of course Ed Rubin for laying the foundations of the lab work for me to build notes off of.
