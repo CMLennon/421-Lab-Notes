@@ -1,6 +1,6 @@
 ---
 Title: Let's Learn R
-date: Lab 1 #"05 April 2019"
+date: "05 April 2019"
 output: 
   html_document:
     theme: flatly
