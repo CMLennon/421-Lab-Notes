@@ -1,6 +1,6 @@
 ---
 Title: Let's Learn R
-date: Lab 1 #"`r format(Sys.time(), '%d %B %Y')`"
+date: #"`r format(Sys.time(), '%d %B %Y')`"
 output: 
   html_document:
     theme: flatly
