@@ -16,7 +16,7 @@ output:
 
 ## Introduction: 
 
-Hi everybody, my name is Connor and I will be helping you with Economics 421! 
+Hi everybody, my name is Connor and I will be helping you with Economics 421! These are a collection of notes from the first lab.
 
 We're going to start with a walkthrough of R.
 
