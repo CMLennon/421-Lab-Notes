@@ -12,10 +12,22 @@ Some Useful Resources:
 
 **Lab Notes**
 
-**Lab 1**: [Learning R: Introduction](https://github.com/CMLennon/421-Lab-Notes/blob/master/Lab1/Lab-1.html) 
+**Lab 1**: [Learning R: Introduction](https://github.com/CMLennon/421-Lab-Notes/blob/master/Lab1/Lab-1.md) 
 - Objects, Functions, Mathematical Operators, Dataframes, Regression, Basic Plots
 
 **Lab 2**: Learning R: Enter the Tidyverse
 - Loading your own CSVs into R, dplyr commands (mutate, summarise, filter etc.), qplot
+
+**Lab 3**: TBD
+
+**Lab 4**: TBD
+
+**Lab 5**: TBD
+
+**Lab 6**: TBD
+
+**Lab 7**: TBD
+
+**Lab 8**: TBD
 
 A note: I owe a great debt of gratitude to John Morehouse, Alex Li, and of course Ed Rubin for laying the foundations of the lab work for me to build notes off of.
