@@ -541,7 +541,7 @@ p_load(ISLR, ggplot2)
 You can also do all of this in base R, but it's not as efficient.
 
 ```r
-#the following code does the same thing. Not as good. More packages you have, the more convinient pacman becomes.
+#the following code does the same thing. Not as good. More packages you have, the more convenient pacman becomes.
 install.packages(c("ISLR","ggplot2"),dependencies = T, repos="http://cran.us.r-project.org")
 ```
 
