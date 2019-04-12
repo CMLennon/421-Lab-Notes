@@ -12,10 +12,10 @@ Some Useful Resources:
 
 **Lab Notes**
 
-**Lab 1**: [Learning R: Introduction](https://github.com/CMLennon/421-Lab-Notes/blob/master/Lab1/Lab-1.md) 
+**Lab 1**: [Learning R: Introduction link 1](https://github.com/CMLennon/421-Lab-Notes/blob/master/Lab1/Lab-1.md)[link 2]()
 - Objects, Functions, Mathematical Operators, Dataframes, Regression, Basic Plots
 
-**Lab 2**: [Learning R: Enter the Tidyverse](https://github.com/CMLennon/421-Lab-Notes/blob/master/Lab2/Lab_2.md) 
+**Lab 2**: [Learning R: Enter the Tidyverse](https://github.com/CMLennon/421-Lab-Notes/blob/master/Lab2/Lab_2.md)[link 2](http://rpubs.com/Clennon/Lab2) 
 - Loading your own CSVs into R, dplyr commands (mutate, summarise, filter etc.), qplot
 
 **Lab 3**: TBD
