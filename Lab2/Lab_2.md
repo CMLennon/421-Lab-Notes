@@ -363,7 +363,8 @@ head(select(pres_df, year))
 
  Alternatively, we can use the pipe operator `%>%`. This takes the dataframe on the left side and passes it to the right. This lets us pass one command to another.
  
-
+ Let's filter our dataframe down to only the `year` and `month` variables, and then pass that dataframe to another filter command that will select only the `month` variable.
+ 
 ```r
 #first, select month and year, then, select month
 head(pres_df %>%
