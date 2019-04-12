@@ -15,7 +15,7 @@ Some Useful Resources:
 **Lab 1**: [Learning R: Introduction](https://github.com/CMLennon/421-Lab-Notes/blob/master/Lab1/Lab-1.md) 
 - Objects, Functions, Mathematical Operators, Dataframes, Regression, Basic Plots
 
-**Lab 2**: [Learning R: Enter the Tidyverse](https://github.com/CMLennon/421-Lab-Notes/blob/master/Lab2/Lab-2.md) 
+**Lab 2**: [Learning R: Enter the Tidyverse](https://github.com/CMLennon/421-Lab-Notes/blob/master/Lab2/Lab_2.md) 
 - Loading your own CSVs into R, dplyr commands (mutate, summarise, filter etc.), qplot
 
 **Lab 3**: TBD
