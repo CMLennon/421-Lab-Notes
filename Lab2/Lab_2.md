@@ -1,6 +1,6 @@
 ---
 Title: Enter the Tidyverse
-date: "Lab 2"
+date: April 12
 output:
   html_document:
     highlight: haddock
