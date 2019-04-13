@@ -4,6 +4,8 @@ Here is where you can see the lab notes for Econometrics, EC421 for Spring 2019.
 
 Some Useful Resources:
 
+[Ed's Winter Course Github Page](https://github.com/edrubin/EC421W19)
+
 [Getting Started With R](https://www.rstudio.com/online-learning/#r-programming) 
 - A nice collection of resources for those starting out in R.
 
