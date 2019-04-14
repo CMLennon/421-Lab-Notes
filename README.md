@@ -20,7 +20,8 @@ Some Useful Resources:
 **Lab 2**: [Learning R: Enter the Tidyverse](https://github.com/CMLennon/421-Lab-Notes/blob/master/Lab2/Lab_2.md) [Alternatively, link 2](http://rpubs.com/Clennon/Lab2) 
 - Loading your own CSVs into R, dplyr commands (mutate, summarise, filter etc.), qplot
 
-**Lab 3**: TBD
+**Lab 3**: Homework Review Session
+- Loading in the problem set CSV, two sample means test, interaction terms, PS-1 help
 
 **Lab 4**: TBD
 
