@@ -13,7 +13,7 @@ output:
 
 
 
-##Lesson 0: Introduction
+## Lesson 0: Introduction
 
 Hi guys! Welcome to week three. This week, we're going to cover directly applicable material: how to set up and run 
 the R code for your homework. In particular, we'll cover some of the more complex coding tasks.
