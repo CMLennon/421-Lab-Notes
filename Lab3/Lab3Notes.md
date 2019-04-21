@@ -1,6 +1,6 @@
 ---
 Title: Lab 3 Homework Help
-date: 4/20/2019
+date: 20 April 2019
 output:
   html_document:
     highlight: haddock
