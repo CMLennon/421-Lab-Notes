@@ -14,13 +14,13 @@ Some Useful Resources:
 
 **Lab Notes**
 
-**Lab 1**: [Learning R: Introduction link 1](https://github.com/CMLennon/421-Lab-Notes/blob/master/Lab1/Lab-1.md) [Alternatively, link 2](http://rpubs.com/Clennon/Lab1)
+**Lab 1**: [Learning R: Introduction link 1](https://github.com/CMLennon/421-Lab-Notes/blob/master/Lab1/Lab-1.md) Alternatively, [link 2](http://rpubs.com/Clennon/Lab1)
 - Objects, Functions, Mathematical Operators, Dataframes, Regression, Basic Plots
 
-**Lab 2**: [Learning R: Enter the Tidyverse](https://github.com/CMLennon/421-Lab-Notes/blob/master/Lab2/Lab_2.md) [Alternatively, link 2](http://rpubs.com/Clennon/Lab2) 
+**Lab 2**: [Learning R: Enter the Tidyverse](https://github.com/CMLennon/421-Lab-Notes/blob/master/Lab2/Lab_2.md) Alternatively, [link 2](http://rpubs.com/Clennon/Lab2) 
 - Loading your own CSVs into R, dplyr commands (mutate, summarise, filter etc.), qplot
 
-**Lab 3**: [Homework Review Session](https://github.com/CMLennon/421-Lab-Notes/blob/master/Lab3/Lab3Notes.md) [Alternatively, link 2](http://rpubs.com/Clennon/Lab3)
+**Lab 3**: [Homework Review Session](https://github.com/CMLennon/421-Lab-Notes/blob/master/Lab3/Lab3Notes.md) Alternatively, [link 2](http://rpubs.com/Clennon/Lab3)
 - Loading in the problem set CSV, two sample means test, interaction terms, PS-1 help
 
 **Lab 4**: [Heteroskedasticity](https://github.com/CMLennon/421-Lab-Notes/blob/master/Lab-4/Lab4Notes.md), Alternatively, [link 2](http://rpubs.com/Clennon/Lab4)
