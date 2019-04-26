@@ -11,13 +11,13 @@ output:
     toc_float: yes
 ---
 
-Welcome to week 4!!!
+# Welcome to week 4!!!
 
 Today, we will be working through some heteroskedasticity examples. 
 
 In order to do that though, we need two things: some data and our handy dandy pacman package. We'll be using the `Caschool` data from `Ecdat` to look at some fun data.
 
-#Lesson 0: loading data and packages
+## Lesson 0: loading data and packages
 
 First, let's load pacman. If you need to, run `install.packages("pacman")` first. If you run into errors, run
 `library(Ecdat,ggplot2)` to get around pacman install concerns. For everybody else,
@@ -102,7 +102,7 @@ Caschool <- mutate(Caschool, scrtot = readscr + mathscr)
 
 Now, we need to do some analysis. Back to regressions.
 
-# Lesson 1: Running Regressions! Again!
+## Lesson 1: Running Regressions! Again!
 
 Let's run the linear regression of total score on income, student-to-teacher ratio, enrollment and expenditures per student. First, let's explore a little.
 
@@ -140,7 +140,7 @@ On your own, interpret coefficients. In particular, think about the coefficient 
 
 Ok, now we need to find a way to examine heteroskedasticity. The first step in doing that is to recover errors, which we have to figure out. Let's do that.
 
-# Lesson 2: Retrieving Residuals from an LM model
+## Lesson 2: Retrieving Residuals from an LM model
 Create the residuals of the regression you just ran. Hint: you can use the mutate command, combined with
 the `resid(your_lm_model)` command. This will return a vector of residuals! This is super handy, especially for this section. Let's create a new column in our dataframe with our errors.
 
@@ -492,7 +492,7 @@ Conclusion, can we reject H0?
 
 Yes! At the 5% significance level. Let's look at another test.
 
-# Lesson 4: Breusch-Pagan test:
+## Lesson 4: Breusch-Pagan test:
 
 Again, we need to follow some steps to run this test. How do we go about this? Another six steps!!
 
@@ -597,13 +597,13 @@ pchisq(q = LM_White, df = 9, lower.tail = F) #this is a chi-squared function. Ta
 
 So what can we say? What is our H0? What is HA?
 
-# Lesson 6: What next?
+## Lesson 6: What next?
 
 How do we fix our problem? We have some serious het problems. We could use a specification, but sometimes those don't work, so we have to turn to heteroskedasticity robust standard errors.
 
 **We could build these on our own**, but R has some built in functions! Let's see how they work. This next section will require new packages called `sandwich` and `lmtest`
 
-#We can also do the following:
+*We can also do the following:*
 
 
 ```r
