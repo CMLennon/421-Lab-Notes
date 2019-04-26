@@ -42,7 +42,7 @@ Let's do some exploration on our own. How do we inspect something? We can ask R 
 We're going to start with some exploration on our own.
 
 
-Question1: Run this command on your own. How many observations are there? What is the timespan the data covers?
+- Question1: Run this command on your own. How many observations are there? What is the timespan the data covers?
 
 Let's take a peak at the first few rows of the dataset. How do we do this?
 
@@ -78,11 +78,11 @@ head(Caschool)
 ```
 
 
-Question 2: What is the range of school size?
-Question 3: What is the range of district average income ?
-Question 4: What is the range of student to teacher ratio?
-Question 5: What is the range of enrollment?
-Question 6: What variables do we have to use to measure student outcomes?
+- Question 2: What is the range of school size?
+- Question 3: What is the range of district average income ?
+- Question 4: What is the range of student to teacher ratio?
+- Question 5: What is the range of enrollment?
+- Question 6: What variables do we have to use to measure student outcomes?
 
 I think using some function of our test scores would work well.
 
