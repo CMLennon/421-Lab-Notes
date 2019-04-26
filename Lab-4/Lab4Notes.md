@@ -1,6 +1,6 @@
 ---
 Title: Lab 4 Heteroskedasticity Tests and Correction
-date: 4/25/2019
+date: April 25 2019
 output:
   html_document:
     highlight: haddock
