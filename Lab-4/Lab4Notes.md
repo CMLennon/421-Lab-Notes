@@ -1,6 +1,6 @@
 ---
 Title: Lab 4 Heteroskedasticity Tests and Correction
-date: April 25 2019
+date: 4/25/2019
 output:
   html_document:
     highlight: haddock
@@ -418,20 +418,20 @@ we can see `avginc` is increasing
 **2.)** Split the data into two groups, in appropriate sizes. We've chosen to be three-eighths to be our sample size. We need to know what 3/8 of our dataset is.
 
 ```r
-as.integer(nrow(Caschool) * 3/ 8) #this will give a number slightly less than version 2
-```
-
-```
-## [1] 157
-```
-
-```r
-n_GQ <- (nrow(Caschool)%/%8) * 3
-n_GQ #this will give us the closest count that gives us the number that is 3/8 of our full sample!
+n_GQ <- as.integer(nrow(Caschool) * 3/ 8)
+(nrow(Caschool)%/%8) * 3 #Option 2. this is one we've covered all the commands for. It will give us something close, but slightly smaller than the last option. Can you think of why? What does the %/% do?
 ```
 
 ```
 ## [1] 156
+```
+
+```r
+n_GQ #this will give us the closest count that gives us the number that is 3/8 of our full sample!
+```
+
+```
+## [1] 157
 ```
 
 **3.)** Run seperate regressions of y (total score) on x (income) for each of the two groups of 3/8. We can do this with clever use of our `head` and `tail` commands.
@@ -464,18 +464,19 @@ stat_GQ
 ```
 
 ```
-## [1] 1.458899
+## [1] 1.39631
 ```
 
 Great. So did you look up the test type? Good. We can use an F-test to produce a p-value for our calculated statistic.
 
 ```r
+#Ok. So. In general, any distribution you can think of has a set of functions you can use on R. Generally, they are prefixed with r, p, q, and d. These correspond to: draws from that distribution (r), likelihood of seeing a number that size (p), the quantile (q) and the density (d). Most often you'll see r and p used but the other ones are useful as well.
 p_GQ <- pf(q = stat_GQ, df1 = n_GQ, df2 = n_GQ, lower.tail = F) #pf gives probability from an f-dist.
 p_GQ
 ```
 
 ```
-## [1] 0.009439426
+## [1] 0.01861109
 ```
 
 So what can we say. I'd challenge you to figure out EXACTLY what our null hypothesis is here. 
@@ -548,7 +549,7 @@ If you're wondering why we used 4 degrees of freedom (df in above function is eq
 
 We reject the null hypothesis with 5% significance level. We have one more test to walk through.
 
-# Lesson 5: White test
+## Lesson 5: White test
 The white test is very similar to the Breusch-Pagan test, with a few modifications:
 
 When regressing the squared errors in the B-P test, in addition to the original regressors, we add interaction terms and squared terms. 
@@ -603,7 +604,6 @@ How do we fix our problem? We have some serious het problems. We could use a spe
 
 **We could build these on our own**, but R has some built in functions! Let's see how they work. This next section will require new packages called `sandwich` and `lmtest`
 
-*We can also do the following:*
 
 
 ```r
