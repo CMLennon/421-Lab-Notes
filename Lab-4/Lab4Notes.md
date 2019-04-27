@@ -1,6 +1,6 @@
 ---
 Title: Lab 4 Heteroskedasticity Tests and Correction
-date: 4/25/2019
+date: 25 April 2019
 output:
   html_document:
     highlight: haddock
@@ -419,7 +419,9 @@ we can see `avginc` is increasing
 
 ```r
 n_GQ <- as.integer(nrow(Caschool) * 3/ 8)
-(nrow(Caschool)%/%8) * 3 #Option 2. this is one we've covered all the commands for. It will give us something close, but slightly smaller than the last option. Can you think of why? What does the %/% do?
+(nrow(Caschool)%/%8) * 3 #Option 2. this is one we've covered all the commands for. 
+#It will give us something close, but slightly smaller than the last option. 
+#Can you think of why? What does the %/% do?
 ```
 
 ```
@@ -439,9 +441,10 @@ n_GQ #this will give us the closest count that gives us the number that is 3/8 o
 
 ```r
 #on the last 3/8
-lm_g1 <- lm(data = tail(Caschool, n_GQ), scrtot ~ avginc + str + enrltot + expnstu) #using the tail command, we are running the reg
-#on the first 3/8
-lm_g2 <- lm(data = head(Caschool, n_GQ), scrtot ~ avginc + str + enrltot + expnstu) #using head, we are doing the above on the first ones
+lm_g1 <- lm(data = tail(Caschool, n_GQ), scrtot ~ avginc + str + enrltot + expnstu)
+#using the tail command, we are running the reg on the first 3/8
+lm_g2 <- lm(data = head(Caschool, n_GQ), scrtot ~ avginc + str + enrltot + expnstu) 
+#using head, we are doing the above on the last 3/8
 ```
 
 **4.)** Record our sum of square errors to test
@@ -470,7 +473,12 @@ stat_GQ
 Great. So did you look up the test type? Good. We can use an F-test to produce a p-value for our calculated statistic.
 
 ```r
-#Ok. So. In general, any distribution you can think of has a set of functions you can use on R. Generally, they are prefixed with r, p, q, and d. These correspond to: draws from that distribution (r), likelihood of seeing a number that size (p), the quantile (q) and the density (d). Most often you'll see r and p used but the other ones are useful as well.
+#Ok. So. In general, any distribution you can think of has a set of functions you can use on R. 
+#Generally, they are prefixed with r, p, q, and d. 
+#These correspond to: draws from that distribution (r), 
+#likelihood of seeing a number that size (p), 
+#the quantile (q) and the density (d). 
+#Most often you'll see r and p used but the other ones are useful as well.
 p_GQ <- pf(q = stat_GQ, df1 = n_GQ, df2 = n_GQ, lower.tail = F) #pf gives probability from an f-dist.
 p_GQ
 ```
