@@ -393,12 +393,11 @@ First, we need to pick a fraction of our sample to compare. Let's look at the fi
 
 What we need to do: compare the variances of first 3/8 and the last 3/8 ranked by the explaining variable of interest
 
-This looks at the ratio and sees how far it is from 1. Think about it. If the ratio is 1, then across large ans small values of your variable of interest, your errors is roughly the same.
+This looks at the ratio and sees how far it is from 1. Think about it. If the ratio is 1, then across large and small values of your variable of interest, your errors are roughly the same.
 
 Note that Goldfeld-Quant only allows you to look at one varibale at a time. Let's focus on income at the moment
 
-
-If we wanted to do this by hand, we'd need to follow some steps. 6 steps in total.
+If we wanted to do this by hand, we'd need to follow some steps. 6 steps in total. Let's walk through them:
 
 **1.)** Order your observations by your variable of interest, in this case, let's do income. It looked the worst in our graphs, so it makes sense to check here.
 
