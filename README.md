@@ -12,6 +12,10 @@ Some Useful Resources:
 [Tidyr cheatsheet](https://github.com/rstudio/cheatsheets/blob/master/data-import.pdf) 
 - A few of the most useful pages you can find.
 
+If you're adventurous, Grant McDermott's data science for economists is an amazing resource. It's designed for PhD students, but not those with any experience with computers. If metrics is your calling, you might enjoy looking at these.
+
+[Grant's Notes](https://github.com/uo-ec607/lectures)
+
 **Lab Notes**
 
 **Lab 1**: [Learning R: Introduction link 1](https://github.com/CMLennon/421-Lab-Notes/blob/master/Lab1/Lab-1.md) Alternatively, [link 2](http://rpubs.com/Clennon/Lab1)
