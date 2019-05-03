@@ -28,7 +28,7 @@ Some Useful Resources:
 - Retrieving errors from your models, Testing for heteroscedasticity in R, graphing errors, using heteroskedasticity robust standard errors.
 
 **Lab 5**: [Homework Help: Problem Set 2](https://github.com/CMLennon/421-Lab-Notes/blob/master/Lab5/Lab5Notes.md), Alternatively, [link 2](http://rpubs.com/Clennon/Lab5)
-- Reviewing tests for heteroskedasticity, retrieving errors, and using heteroskedasticity robust errors in an LM model (FLE)
+- Reviewing tests for heteroskedasticity, retrieving errors, and using heteroskedasticity robust errors in an LM model (FELM)
 
 **Lab 6**: TBD
 
