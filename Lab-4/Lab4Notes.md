@@ -472,7 +472,7 @@ stat_GQ
 Great. So did you look up the test type? Good. We can use an F-test to produce a p-value for our calculated statistic.
 
 
-**Note: I made a mistake here. What we want is n_GQ MINUS the number of variables. IE Degrees of freedom for each subgroup. In this case, it is 5. So subtract five from n_GQ**
+**Note: I made a mistake here. What we want is n_GQ MINUS the number of variables. IE Degrees of freedom for each subgroup. In this case, it is 5. So subtract five from n_GQ. Thanks to Jason for catching the issue.**
 ```r
 #Ok. So. In general, any distribution you can think of has a set of functions you can use on R. 
 #Generally, they are prefixed with r, p, q, and d. 
