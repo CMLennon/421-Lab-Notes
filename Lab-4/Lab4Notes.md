@@ -471,6 +471,8 @@ stat_GQ
 
 Great. So did you look up the test type? Good. We can use an F-test to produce a p-value for our calculated statistic.
 
+
+**Note: I made a mistake here. What we want is n_GQ MINUS the number of variables. IE Degrees of freedom for each subgroup. In this case, it is 5. So subtract five from n_GQ**
 ```r
 #Ok. So. In general, any distribution you can think of has a set of functions you can use on R. 
 #Generally, they are prefixed with r, p, q, and d. 
@@ -478,7 +480,7 @@ Great. So did you look up the test type? Good. We can use an F-test to produce a
 #likelihood of seeing a number that size (p), 
 #the quantile (q) and the density (d). 
 #Most often you'll see r and p used but the other ones are useful as well.
-p_GQ <- pf(q = stat_GQ, df1 = n_GQ, df2 = n_GQ, lower.tail = F) #pf gives probability from an f-dist.
+p_GQ <- pf(q = stat_GQ, df1 = n_GQ - 5, df2 = n_GQ - 5, lower.tail = F) #pf gives probability from an f-dist.
 p_GQ
 ```
 
