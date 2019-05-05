@@ -25,6 +25,7 @@ Some Useful Resources:
 - Loading in the problem set CSV, two sample means test, interaction terms, PS-1 help
 
 *Note: I made an error in these notes regarding Goldfeld Quandt degrees of frredom. Look in the notes for a correction*
+
 **Lab 4**: [Heteroskedasticity](https://github.com/CMLennon/421-Lab-Notes/blob/master/Lab-4/Lab4Notes.md), Alternatively, [link 2](http://rpubs.com/Clennon/Lab4)
 - Retrieving errors from your models, Testing for heteroscedasticity in R, graphing errors, using heteroskedasticity robust standard errors.
 
