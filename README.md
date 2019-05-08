@@ -35,7 +35,7 @@ Some Useful Resources:
 **Lab 6**: Functions and introduction to time series data
  - Generating simulated data, functions, for loops, a tiny bit of time series
 
-**Lab 7**: TBD
+**Lab 7**: Time series
 
 **Lab 8**: TBD
 
