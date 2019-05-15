@@ -32,7 +32,7 @@ Some Useful Resources:
 **Lab 5**: [Homework Help: Problem Set 2](https://github.com/CMLennon/421-Lab-Notes/blob/master/Lab5/Lab5Notes.md), Alternatively, [link 2](http://rpubs.com/Clennon/Lab5)
 - Reviewing tests for heteroskedasticity, retrieving errors, and using heteroskedasticity robust errors in an LM model (FELM)
 
-**Lab 6**: Functions and introduction to time series data
+**Lab 6**: [Functions and introduction to time series data](https://github.com/CMLennon/421-Lab-Notes/blob/master/Lab6/Lab6Notes.md), Alternatively, [link 2](http://rpubs.com/Clennon/Lab6)
  - Generating simulated data, functions, for loops, a tiny bit of time series
 
 **Lab 7**: Time series
