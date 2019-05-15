@@ -12,6 +12,8 @@ Some Useful Resources:
 [Tidyr cheatsheet](https://github.com/rstudio/cheatsheets/blob/master/data-import.pdf) 
 - A few of the most useful pages you can find.
 
+[ggplot2 cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf)
+- Another few of the most useful pages you can find, ggplot this time
 
 **Lab Notes**
 
@@ -33,7 +35,7 @@ Some Useful Resources:
 - Reviewing tests for heteroskedasticity, retrieving errors, and using heteroskedasticity robust errors in an LM model (FELM)
 
 **Lab 6**: [Functions and introduction to time series data](https://github.com/CMLennon/421-Lab-Notes/blob/master/Lab6/Lab6Notes.md), Alternatively, [link 2](http://rpubs.com/Clennon/Lab6)
- - Generating simulated data, functions, for loops, a tiny bit of time series
+ - Generating simulated data, functions, sapply, for loops, a tiny bit of time series (including bonus prediction method at end)
 
 **Lab 7**: Time series
 
