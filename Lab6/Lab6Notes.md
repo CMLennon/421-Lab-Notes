@@ -207,7 +207,29 @@ x_slow #and so forth
 ## [1] 10.000000  5.000000  3.333333
 ```
 
-Really though, we can loop over any object we want. Maybe we want to loop over some weird sequence, say `c(2,300,-4,6)` and the loop will perform your object. 
+Really though, we can loop over any object we want. Maybe we want to loop over some weird sequence, say `c(2,300,-4,6)` and the loop will perform some set of operations based on it. For instance,
+
+
+```r
+z = 0
+for (i in c(2,300,-4,6)) {
+  print(paste0(i, ' plus ', z, ' equals'))
+  z = z + i
+  print(z)
+}
+```
+
+```
+## [1] "2 plus 0 equals"
+## [1] 2
+## [1] "300 plus 2 equals"
+## [1] 302
+## [1] "-4 plus 302 equals"
+## [1] 298
+## [1] "6 plus 298 equals"
+## [1] 304
+```
+
 
 Lets rewrite our function `plot_sq` with a for loop inside it
 
@@ -230,7 +252,7 @@ return(plot(x=x,y=y))
 plot_sqf(1:10)
 ```
 
-![](Lab6Notes_files/figure-html/unnamed-chunk-8-1.png)<!-- -->
+![](Lab6Notes_files/figure-html/unnamed-chunk-9-1.png)<!-- -->
 
 Understanding the loop
   
@@ -246,7 +268,7 @@ Let's take a look at the plot and make sure it is the same as our last version w
 plot_sqf(1:3)
 ```
 
-![](Lab6Notes_files/figure-html/unnamed-chunk-9-1.png)<!-- -->
+![](Lab6Notes_files/figure-html/unnamed-chunk-10-1.png)<!-- -->
 
 Great! But  that graph looked horrible. How should we spruce it up? Great question.
 
@@ -304,7 +326,7 @@ ggplot(starwars,aes(x=height,y=mass)) + geom_point()
 ## Warning: Removed 28 rows containing missing values (geom_point).
 ```
 
-![](Lab6Notes_files/figure-html/unnamed-chunk-11-1.png)<!-- -->
+![](Lab6Notes_files/figure-html/unnamed-chunk-12-1.png)<!-- -->
 
 Who is the outlier? Any guesses?
 
@@ -320,7 +342,7 @@ ggplot(starwars %>% filter(mass<1000),aes(x=height,y=mass))+
 labs(x= "Mass", y="Height") + theme_minimal()
 ```
 
-![](Lab6Notes_files/figure-html/unnamed-chunk-12-1.png)<!-- -->
+![](Lab6Notes_files/figure-html/unnamed-chunk-13-1.png)<!-- -->
 
 Great! Now lets return to our function from before and make the plots we produce look a bit nicer, using ggplot.
 
@@ -342,7 +364,7 @@ This will make it so our graph is indeed a connected line.
 plot_sq2(-20:20) 
 ```
 
-![](Lab6Notes_files/figure-html/unnamed-chunk-14-1.png)<!-- -->
+![](Lab6Notes_files/figure-html/unnamed-chunk-15-1.png)<!-- -->
 
 ```r
 #nice!!
@@ -376,7 +398,7 @@ ggplot(data = Auto)+
   geom_point(aes(x=mpg,y=weight, col= cylinders))
 ```
 
-![](Lab6Notes_files/figure-html/unnamed-chunk-16-1.png)<!-- -->
+![](Lab6Notes_files/figure-html/unnamed-chunk-17-1.png)<!-- -->
 
 Now by size:
 
@@ -387,7 +409,7 @@ ggplot(Auto) +
   geom_point(aes(x=mpg,y=weight, size= cylinders), alpha=.3)
 ```
 
-![](Lab6Notes_files/figure-html/unnamed-chunk-17-1.png)<!-- -->
+![](Lab6Notes_files/figure-html/unnamed-chunk-18-1.png)<!-- -->
 
 Not so hard, right? Incredibly flexible and, compared to most languages it's easy to use!
 
@@ -481,7 +503,7 @@ mean(ts_model2(3,.39, .87, .04, 100)[,2])
 ```
 
 ```
-## [1] 2.999259
+## [1] 3.004942
 ```
 
 
@@ -493,7 +515,7 @@ ggplot(aes(x = time, y = model), data = ts_model2(3,.39, .87, .04, 100)) +
   theme_minimal()
 ```
 
-![](Lab6Notes_files/figure-html/unnamed-chunk-21-1.png)<!-- -->
+![](Lab6Notes_files/figure-html/unnamed-chunk-22-1.png)<!-- -->
 
 A quick reminder about AR models:
 
@@ -507,7 +529,7 @@ ggplot(aes(x = time, y = model), data = ts_model2(4,.1, 1, 10, 100)) +
   theme_minimal()
 ```
 
-![](Lab6Notes_files/figure-html/unnamed-chunk-22-1.png)<!-- -->
+![](Lab6Notes_files/figure-html/unnamed-chunk-23-1.png)<!-- -->
 
 This is also a problem when a = -1. It looks a LOT different though:
 
@@ -519,7 +541,7 @@ ggplot(aes(x = time, y = model), data = ts_model2(4,.1, -1, 10, 100)) +
   theme_minimal()
 ```
 
-![](Lab6Notes_files/figure-html/unnamed-chunk-23-1.png)<!-- -->
+![](Lab6Notes_files/figure-html/unnamed-chunk-24-1.png)<!-- -->
 
 Let's turn it up to 11!!!
 
@@ -531,7 +553,7 @@ ggplot(aes(x = time, y = model), data = ts_model2(4,.1, 11, 10, 100)) +
   theme_minimal()
 ```
 
-![](Lab6Notes_files/figure-html/unnamed-chunk-24-1.png)<!-- -->
+![](Lab6Notes_files/figure-html/unnamed-chunk-25-1.png)<!-- -->
 
 
  * These processes are **non-stationary**. In other words, it will diverge over time, which means it's hard to predict into the future and may not be a realistic representation of a process.
@@ -625,7 +647,8 @@ To do this, we can use a for loop to calculate a leave-one-out forecast for ever
 ```r
 #Note: this is an illustration of how you can use the toolset you already have to do a forecast: 
 #there are definitely better forecasts for rGDP, and definitely other ways to do this exact process. This is mostly
-#to illustrate an application of the tools you've learned so far.
+#to illustrate an application of the tools you've learned so far. In particular, to do this rigorously, 
+#you'd likely want to train a model on some data, then predict on other data. But that's a topic for another time.
 
 
 #Using some fun indexing tricks, we can pull the coefficients from our coeftest object from before.
@@ -641,7 +664,7 @@ ggplot(aes(x = DATE, y = ldgdpc1), data = gdpc1) +
   labs(x = 'Year-Month', y = 'log-difference in Real GDP')
 ```
 
-![](Lab6Notes_files/figure-html/unnamed-chunk-29-1.png)<!-- -->
+![](Lab6Notes_files/figure-html/unnamed-chunk-30-1.png)<!-- -->
     
 and our MSE of our prediction is:
 
