@@ -37,7 +37,7 @@ Some Useful Resources:
 **Lab 6**: [Functions and introduction to time series data](https://github.com/CMLennon/421-Lab-Notes/blob/master/Lab6/Lab6Notes.md), Alternatively, [link 2](http://rpubs.com/Clennon/Lab6)
  - Generating simulated data, functions, sapply, for loops, a tiny bit of time series (including bonus prediction method at end)
 
-**Lab 7**: [Practice for Time Series Simulation, with Suggested Activities](), Altenatively, [link 2](http://rpubs.com/Clennon/Lab7)
+**Lab 7**: [Practice for Time Series Simulation, with Suggested Activities](https://github.com/CMLennon/421-Lab-Notes/blob/master/Lab7/Lab7Notes.md), Altenatively, [link 2](http://rpubs.com/Clennon/Lab7)
  - Simulate an ADL(1,1) model, piece by piece, and generate your own data simulations for an AR(2) and MA(2) process on your own.
 
 **Lab 8**: Homework Help for Problem set 3
