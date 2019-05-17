@@ -204,7 +204,6 @@ dadl <- adl11(y_0 = 60, b_0= 10,a1 = 5/6,b1= -1/6, b2 = -1/3, sigma_u =2.5,
 #Now, we can plot this dataframe using ggplot and layers.
 ggplot(aes(x = time, y = average_commute), data = dadl) + 
   geom_line(col = 'red') + #draw our red line
-  labs(xlab = 'Months', ylab = 'Average Commute Time (Minutes)') +
   theme_fivethirtyeight() #add a theme to jazz it up
 ```
 
