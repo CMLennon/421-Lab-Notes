@@ -1,6 +1,6 @@
 ---
 title: Week 8 Homework Notes
-date: May 24 2019
+date: 5/24/2019
 output:
   html_document:
     highlight: haddock
@@ -106,7 +106,7 @@ And our coefficient is quite significant. Anything else? We might be ignoring so
 
 Now suppose you believe the price of gas might depend on the price of oil today and yesterday. In other words, we are are interested in estimating the following model:
   
-`P_t.Gas = B0+B1*P_t.oil+P_t-1.oil+B2*P_t-2.oil+u_t`
+`P_t.Oil = B0+B1*P_t.Gas+P_t-1.Gas+B2*P_t-2.Gas+u_t`
 
 To do this, we need to use a 'lagged' version of P_t.oil, a variable which we do not currently have in our data-frame. A lag, really, is a fancy way of saying a version of a variable from before t. You have a few options to do this:
   

@@ -385,7 +385,7 @@ div.tocify {
 <div id="lesson-2-dynamic-version-estimating-a-dynamic-model" class="section level2">
 <h2>Lesson 2: Dynamic version, estimating a dynamic model</h2>
 <p>Now suppose you believe the price of gas might depend on the price of oil today and yesterday. In other words, we are are interested in estimating the following model:</p>
-<p><code>P_t.Gas = B0+B1*P_t.oil+P_t-1.oil+B2*P_t-2.oil+u_t</code></p>
+<p><code>P_t.Oil = B0+B1*P_t.Gas+P_t-1.Gas+B2*P_t-2.Gas+u_t</code></p>
 <p>To do this, we need to use a ‘lagged’ version of P_t.oil, a variable which we do not currently have in our data-frame. A lag, really, is a fancy way of saying a version of a variable from before t. You have a few options to do this:</p>
 <ul>
 <li>Create a new variable <span class="math inline">\(P_{t-1}^{oil}\)</span> and add it to our dataframe, then do the regression</li>
