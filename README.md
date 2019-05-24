@@ -40,7 +40,7 @@ Some Useful Resources:
 **Lab 7**: [Practice for Time Series Simulation, with Suggested Activities](https://github.com/CMLennon/421-Lab-Notes/blob/master/Lab7/Lab7Notes.md), Altenatively, [link 2](http://rpubs.com/Clennon/Lab7)
  - Simulate an ADL(1,1) model, piece by piece, and generate your own data simulations for an AR(2) and MA(2) process on your own.
 
-**Lab 8_5**: Homework Help for Problem set 3, alternatively, [link 2](http://rpubs.com/Clennon/Lab8_5)
+**Lab 8_5**: [Homework Help for Problem set 3](https://github.com/CMLennon/421-Lab-Notes/blob/master/Lab8_HW/Week8HomeworkNotes.md), alternatively, [link 2](http://rpubs.com/Clennon/Lab8_5)
  - Testing different hypotheses of data structure against one another, graphing residuals and lags of residuals (including explanation of lag() function.)
  
  **Lab 8**: What We actually did in Lab
