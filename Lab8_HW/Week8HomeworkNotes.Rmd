@@ -65,11 +65,11 @@ To do this in R is straightfoward, we already know how!
 We just need to run an OLS regression. We'll use `lm` to do so.
 
 ```{r}
-static_mod = lm(price_gas~price_oil,data=gas_oil)
+static_mod = lm(price_oil~price_gas,data=gas_oil)
 tidy(static_mod)
 ```
 
-  What does this say? Well first off, it certainly seems like a higher price of oil today would indicate a higher price of gas today. That seems reasonable.
+  What does this say? Well first off, it certainly seems like a higher price of gas today would indicate a higher price of oil today. That seems reasonable.
 
 And our coefficient is quite significant. Anything else? We might be ignoring some dynamics here, so let's move on and try to estimate a dynamic version of this model like the one you do in your homework.
   
@@ -94,22 +94,22 @@ Remember, what will happen when your data is in it's first period? Trying to lag
 ```{r}
 #When you are lagging a single period, the lag() fcn introduces a single NA to the beginning
 #of your vector.
-gas_oil$price_oil_t1 = c(NaN, na.omit(lag(gas_oil$price_oil,1)))
+gas_oil$price_gas_t1 = c(NaN, na.omit(lag(gas_oil$price_gas,1)))
 
 #When you are lagging two periods, the lag() fcn introduces TWO NAs to the beginning of your #vector.
-gas_oil$price_oil_t2 = c(NaN,NaN,na.omit(lag(gas_oil$price_oil,2)))
+gas_oil$price_gas_t2 = c(NaN,NaN,na.omit(lag(gas_oil$price_gas,2)))
 ```
 
 Now that you have these lagged values, you can run your regression, by providing your new variables to the following equation:
 
-`P_t.Gas = B0+B1*P_t.oil+B1*lag(P_t.oil)+B2*lag2(P_t.oil)+u_t`
+`P_t.Oil = B0+B1*P_t.gas+B1*lag(P_t.gas)+B2*lag2(P_t.gas)+u_t`
 
 Alternatively, you can pass these lag value functions directly to a regression object, which looks like this:
 
 **option 2**
 
 ```{r}
-price_2lag = lm(price_gas~price_oil+lag(price_oil, 1)+lag(price_oil, 2),data= gas_oil)
+price_2lag = lm(price_oil~price_gas+lag(price_gas, 1)+lag(price_gas, 2),data= gas_oil)
 summary(price_2lag)
 ```
 
@@ -123,7 +123,7 @@ Lets run an F-test to compare our two models. To do this in R, we need something
   
 ```{r}
 #recreate our 2-lag regression from earlier.
-price_2lag = lm(price_gas~price_oil+lag(price_oil, 1)+lag(price_oil, 2),data= gas_oil)
+price_2lag = lm(price_oil~price_gas+lag(price_gas, 1)+lag(price_gas, 2),data= gas_oil)
 ```
 
 Now we bring in the `lmtest` package for the `waldtest()` function. 
@@ -132,13 +132,13 @@ Now we bring in the `lmtest` package for the `waldtest()` function.
 
 ```{r}
 #lmtest package is needed here.
-lmtest::waldtest(price_2lag,c("lag(price_oil, 1)","lag(price_oil, 2)"), test="F")
+lmtest::waldtest(price_2lag,c("lag(price_gas, 1)","lag(price_gas, 2)"), test="F")
 ```
 
 
 Now, on your own, using one of the techniques describes above I want you to estimate the model:
   
-`P_t.Gas = B0+B1*P_t.oil+P_t-1.oil+B2*P_t-1.Gas+u_t`
+`P_t.Oil = B0+B1*P_t.gas+P_t-1.gas+B2*P_t-1.Oil+u_t`
 
 Okay. You can try now, and I'll provide the answer below.
 
@@ -294,7 +294,7 @@ However, what we're looking for is different, we don't care (here) about how muc
 
 So, like in breusch pagan, let's find out how much our lagged error terms explain our present error terms, by running the following eqn:
 
-`u_t = a_o+a1*P_(t).oil+a2*P_(t-1).gas+a3*P_(t-1)+r1*u_(t-1)+r2*u_(t-2)+e_t`
+`u_t = a_o+a1*P_(t).gas+a2*P_(t-1).gas+a3*P_(t-1)+r1*u_(t-1)+r2*u_(t-2)+e_t`
 
 What terms would we want to test to determine second-order autocorrelation? The ones on our lagged error terms. Our test will then be:
 
@@ -313,7 +313,7 @@ gas_oil$e_price_mod_lag2 <- c(NA, NA, lag(resid(price_2lag), 2))
 **2.) Now, we can run the regression outlined above**
 
 ```{r}
-bg_mod <- lm(data = gas_oil, e_1d ~ price_oil_t1 + price_oil_t2 + e_price_mod_lag1 + e_price_mod_lag2)
+bg_mod <- lm(data = gas_oil, e_1d ~ price_gas_t1 + price_gas_t2 + e_price_mod_lag1 + e_price_mod_lag2)
 ```
 
 **3.) Now, we can run the test.** 

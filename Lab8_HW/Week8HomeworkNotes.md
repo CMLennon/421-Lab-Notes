@@ -1,6 +1,6 @@
 ---
 title: Week 8 Homework Notes
-date: May 24 2019
+date: 5/24/2019
 output:
   html_document:
     highlight: haddock
@@ -86,7 +86,7 @@ We just need to run an OLS regression. We'll use `lm` to do so.
 
 
 ```r
-static_mod = lm(price_gas~price_oil,data=gas_oil)
+static_mod = lm(price_oil~price_gas,data=gas_oil)
 tidy(static_mod)
 ```
 
@@ -94,11 +94,11 @@ tidy(static_mod)
 ## # A tibble: 2 x 5
 ##   term        estimate std.error statistic  p.value
 ##   <chr>          <dbl>     <dbl>     <dbl>    <dbl>
-## 1 (Intercept)   3.33     0.263       12.6  5.64e-29
-## 2 price_oil     0.0173   0.00395      4.38 1.71e- 5
+## 1 (Intercept)    41.3      4.31       9.58 7.18e-19
+## 2 price_gas       3.89     0.888      4.38 1.71e- 5
 ```
 
-  What does this say? Well first off, it certainly seems like a higher price of oil today would indicate a higher price of gas today. That seems reasonable.
+  What does this say? Well first off, it certainly seems like a higher price of gas today would indicate a higher price of oil today. That seems reasonable.
 
 And our coefficient is quite significant. Anything else? We might be ignoring some dynamics here, so let's move on and try to estimate a dynamic version of this model like the one you do in your homework.
   
@@ -124,15 +124,15 @@ Remember, what will happen when your data is in it's first period? Trying to lag
 ```r
 #When you are lagging a single period, the lag() fcn introduces a single NA to the beginning
 #of your vector.
-gas_oil$price_oil_t1 = c(NaN, na.omit(lag(gas_oil$price_oil,1)))
+gas_oil$price_gas_t1 = c(NaN, na.omit(lag(gas_oil$price_gas,1)))
 
 #When you are lagging two periods, the lag() fcn introduces TWO NAs to the beginning of your #vector.
-gas_oil$price_oil_t2 = c(NaN,NaN,na.omit(lag(gas_oil$price_oil,2)))
+gas_oil$price_gas_t2 = c(NaN,NaN,na.omit(lag(gas_oil$price_gas,2)))
 ```
 
 Now that you have these lagged values, you can run your regression, by providing your new variables to the following equation:
 
-`P_t.Gas = B0+B1*P_t.oil+B1*lag(P_t.oil)+B2*lag2(P_t.oil)+u_t`
+`P_t.Oil = B0+B1*P_t.gas+B1*lag(P_t.gas)+B2*lag2(P_t.gas)+u_t`
 
 Alternatively, you can pass these lag value functions directly to a regression object, which looks like this:
 
@@ -140,33 +140,33 @@ Alternatively, you can pass these lag value functions directly to a regression o
 
 
 ```r
-price_2lag = lm(price_gas~price_oil+lag(price_oil, 1)+lag(price_oil, 2),data= gas_oil)
+price_2lag = lm(price_oil~price_gas+lag(price_gas, 1)+lag(price_gas, 2),data= gas_oil)
 summary(price_2lag)
 ```
 
 ```
 ## 
 ## Call:
-## lm(formula = price_gas ~ price_oil + lag(price_oil, 1) + lag(price_oil, 
+## lm(formula = price_oil ~ price_gas + lag(price_gas, 1) + lag(price_gas, 
 ##     2), data = gas_oil)
 ## 
 ## Residuals:
 ##     Min      1Q  Median      3Q     Max 
-## -3.4435 -1.4610 -0.8231  1.4571  9.1188 
+## -46.146 -29.557  -5.526  21.127  74.814 
 ## 
 ## Coefficients:
-##                    Estimate Std. Error t value Pr(>|t|)    
-## (Intercept)        3.360828   0.268196  12.531   <2e-16 ***
-## price_oil          0.023515   0.026608   0.884    0.378    
-## lag(price_oil, 1)  0.003731   0.043601   0.086    0.932    
-## lag(price_oil, 2) -0.010486   0.026581  -0.394    0.694    
+##                   Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)         40.945      4.444   9.214   <2e-16 ***
+## price_gas            1.688      2.622   0.644    0.520    
+## lag(price_gas, 1)    1.231      3.584   0.343    0.732    
+## lag(price_gas, 2)    1.101      2.608   0.422    0.673    
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## Residual standard error: 2.127 on 262 degrees of freedom
+## Residual standard error: 31.8 on 262 degrees of freedom
 ##   (2 observations deleted due to missingness)
-## Multiple R-squared:  0.06631,	Adjusted R-squared:  0.05562 
-## F-statistic: 6.202 on 3 and 262 DF,  p-value: 0.0004379
+## Multiple R-squared:  0.0684,	Adjusted R-squared:  0.05773 
+## F-statistic: 6.412 on 3 and 262 DF,  p-value: 0.000331
 ```
 
 What happened? Where did all of our significance go? Any ideas? We need to examine this further by seeing if these lags are actually providing some useful explanatory power. How do we normally do this?
@@ -180,7 +180,7 @@ Lets run an F-test to compare our two models. To do this in R, we need something
 
 ```r
 #recreate our 2-lag regression from earlier.
-price_2lag = lm(price_gas~price_oil+lag(price_oil, 1)+lag(price_oil, 2),data= gas_oil)
+price_2lag = lm(price_oil~price_gas+lag(price_gas, 1)+lag(price_gas, 2),data= gas_oil)
 ```
 
 Now we bring in the `lmtest` package for the `waldtest()` function. 
@@ -190,23 +190,23 @@ Now we bring in the `lmtest` package for the `waldtest()` function.
 
 ```r
 #lmtest package is needed here.
-lmtest::waldtest(price_2lag,c("lag(price_oil, 1)","lag(price_oil, 2)"), test="F")
+lmtest::waldtest(price_2lag,c("lag(price_gas, 1)","lag(price_gas, 2)"), test="F")
 ```
 
 ```
 ## Wald test
 ## 
-## Model 1: price_gas ~ price_oil + lag(price_oil, 1) + lag(price_oil, 2)
-## Model 2: price_gas ~ price_oil
+## Model 1: price_oil ~ price_gas + lag(price_gas, 1) + lag(price_gas, 2)
+## Model 2: price_oil ~ price_gas
 ##   Res.Df Df      F Pr(>F)
 ## 1    262                 
-## 2    264 -2 0.1674 0.8459
+## 2    264 -2 0.4621 0.6305
 ```
 
 
 Now, on your own, using one of the techniques describes above I want you to estimate the model:
   
-`P_t.Gas = B0+B1*P_t.oil+P_t-1.oil+B2*P_t-1.Gas+u_t`
+`P_t.Oil = B0+B1*P_t.gas+P_t-1.gas+B2*P_t-1.Oil+u_t`
 
 Okay. You can try now, and I'll provide the answer below.
 
@@ -303,7 +303,7 @@ gas_oil$e_1d <- c(resid(price_2lag))
 ```
 
 ```
-## Error in `$<-.data.frame`(`*tmp*`, e_1d, value = c(`3` = -1.75161433965873, : replacement has 266 rows, data has 268
+## Error in `$<-.data.frame`(`*tmp*`, e_1d, value = c(`3` = -31.4494811876707, : replacement has 266 rows, data has 268
 ```
 
 ```r
@@ -312,7 +312,7 @@ gas_oil$e_1d_lag <- c(lag(resid(price_2lag)))
 ```
 
 ```
-## Error in `$<-.data.frame`(`*tmp*`, e_1d_lag, value = c(`3` = NA, `4` = -1.75161433965873, : replacement has 266 rows, data has 268
+## Error in `$<-.data.frame`(`*tmp*`, e_1d_lag, value = c(`3` = NA, `4` = -31.4494811876707, : replacement has 266 rows, data has 268
 ```
 
 You'll notice that we're two short. **hah**. Sorry not sorry. 
@@ -428,7 +428,7 @@ However, what we're looking for is different, we don't care (here) about how muc
 
 So, like in breusch pagan, let's find out how much our lagged error terms explain our present error terms, by running the following eqn:
 
-`u_t = a_o+a1*P_(t).oil+a2*P_(t-1).gas+a3*P_(t-1)+r1*u_(t-1)+r2*u_(t-2)+e_t`
+`u_t = a_o+a1*P_(t).gas+a2*P_(t-1).gas+a3*P_(t-1)+r1*u_(t-1)+r2*u_(t-2)+e_t`
 
 What terms would we want to test to determine second-order autocorrelation? The ones on our lagged error terms. Our test will then be:
 
@@ -449,7 +449,7 @@ gas_oil$e_price_mod_lag2 <- c(NA, NA, lag(resid(price_2lag), 2))
 
 
 ```r
-bg_mod <- lm(data = gas_oil, e_1d ~ price_oil_t1 + price_oil_t2 + e_price_mod_lag1 + e_price_mod_lag2)
+bg_mod <- lm(data = gas_oil, e_1d ~ price_gas_t1 + price_gas_t2 + e_price_mod_lag1 + e_price_mod_lag2)
 ```
 
 **3.) Now, we can run the test.** 
@@ -464,13 +464,13 @@ lmtest::waldtest(bg_mod, c("e_price_mod_lag1", "e_price_mod_lag2"), terms = 2)
 ```
 ## Wald test
 ## 
-## Model 1: e_1d ~ price_oil_t1 + price_oil_t2 + e_price_mod_lag1 + e_price_mod_lag2
-## Model 2: e_1d ~ price_oil_t1 + price_oil_t2
-## Model 3: e_1d ~ price_oil_t1
-##   Res.Df Df        F Pr(>F)    
-## 1    259                       
-## 2    261 -2 918.7715 <2e-16 ***
-## 3    262 -1   0.0034 0.9532    
+## Model 1: e_1d ~ price_gas_t1 + price_gas_t2 + e_price_mod_lag1 + e_price_mod_lag2
+## Model 2: e_1d ~ price_gas_t1 + price_gas_t2
+## Model 3: e_1d ~ price_gas_t1
+##   Res.Df Df      F Pr(>F)    
+## 1    259                     
+## 2    261 -2 5175.5 <2e-16 ***
+## 3    262 -1    0.0 0.9951    
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
