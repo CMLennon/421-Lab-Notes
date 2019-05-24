@@ -1,6 +1,6 @@
 ---
 Title: Lab 7 Practicing with Functions and More Time Series
-date: 5/17/2019
+date: May 17 2019
 output:
   html_document:
     highlight: haddock
