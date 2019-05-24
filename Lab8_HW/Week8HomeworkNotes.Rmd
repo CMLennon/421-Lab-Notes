@@ -143,7 +143,7 @@ Now, on your own, using one of the techniques describes above I want you to esti
 Okay. You can try now, and I'll provide the answer below.
 
 ```{r, answer}
-price1_gas1_mod <- lm(price_gas ~ lag(price_gas, 1) + price_oil + lag(price_oil, 1)
+price1_gas1_mod <- lm(price_oil ~ lag(price_oil, 1) + price_gas + lag(price_gas, 1)
                       , data = gas_oil)
 ```
 

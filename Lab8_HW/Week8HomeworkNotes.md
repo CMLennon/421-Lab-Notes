@@ -1,6 +1,6 @@
 ---
 title: Week 8 Homework Notes
-date: May 24 2019
+date: 5/24/2019
 output:
   html_document:
     highlight: haddock
@@ -212,7 +212,7 @@ Okay. You can try now, and I'll provide the answer below.
 
 
 ```r
-price1_gas1_mod <- lm(price_gas ~ lag(price_gas, 1) + price_oil + lag(price_oil, 1)
+price1_gas1_mod <- lm(price_oil ~ lag(price_oil, 1) + price_gas + lag(price_gas, 1)
                       , data = gas_oil)
 ```
 
