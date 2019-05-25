@@ -1,6 +1,6 @@
 ---
 title: Week 8 Homework Notes
-date: 5/24/2019
+date: May 24 2019
 output:
   html_document:
     highlight: haddock
