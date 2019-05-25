@@ -43,7 +43,7 @@ Some Useful Resources:
 **Lab 8_5**: [Homework Help for Problem set 3](https://github.com/CMLennon/421-Lab-Notes/blob/master/Lab8_HW/Week8HomeworkNotes.md), alternatively, [link 2](http://rpubs.com/Clennon/Lab8_5)
  - Testing different hypotheses of data structure against one another, graphing residuals and lags of residuals (including explanation of lag() function.)
  
- **Lab 8**: What We actually did in Lab
+ **Lab 8**: What We actually did in Lab, alternatively, [link 2](http://rpubs.com/Clennon/Lab8)
  - Work with FRED data to examine autocorrelation, test for different data structures, and understanding the `lag`/`waldtest` commands.
  
  **Lab 9**: TBD
