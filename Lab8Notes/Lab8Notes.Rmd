@@ -1,0 +1,386 @@
+---
+title: Week 8 Lab Notes
+date: May 24 2019
+output:
+  html_document:
+    highlight: haddock
+    keep_md: yes
+    theme: flatly
+    toc: yes
+    toc_depth: 4
+    toc_float: yes
+---
+
+Hi guys, Welcome to week 8!
+
+This set of activities is designed to help you learn the functions you'll be using in your homework 
+set, which will be assigned to you soon.
+
+Of course, we're going to start as we always do, loading some packages.
+
+Our first package we want to add to our usual set is the 'lmtest' package which gives us access to
+the waldtest function - you guys saw this in class, but we'll walk through how to use it in regards
+to your homework.
+
+## Lesson 0: Packages
+If you need it: `install.packages("pacman",dependencies = T,repos = "http://cran.us.r-project.org")`
+
+```{r}
+library(pacman)
+p_load(tidyverse, magrittr, ggplot2, lmtest, broom)
+```
+
+
+
+## Lesson 0.5: Load the Data
+
+We've done this bit before, but just to separate it out a bit, let's use `read_csv()` to load the data. This data is currently on canvas, but you can get it from the [FRED's website](https://fred.stlouisfed.org/) too.
+
+
+```{r}
+freddat <- read_csv("/Users/connor/Dropbox/EC421_Lab/week8/GDPData.csv")
+names(freddat)
+```
+
+This data was very recently downloaded (Late May, 2019) and comes from the St. Louis Federal Reserve bank.
+
+On your own, examine the data and figure out the time frequency. If you notice, the `date` column is in days, but the observations are occurring every quarter.
+
+let's talk about these variables. I renamed some of these variables to make them more readible. 
+
+
+ - rGDP: real gdp
+ - Date: date 
+ - PAYEMS_PC1: Chained Price Index, ie, inflation 
+ - IndProd: Industrial Production
+ - Weekly Wage: Average weekly takehome pay for a worker 
+ - PAYEMS_PC1: Number on payrolls. 
+ 
+ *Note:* All of these variables are in percent change from last period.
+ 
+ *Note 2:* We can rename the variables in a dataframe by using the `names(your_df)` command, and passing a vector of strings, like so
+ 
+ `names(df) <- c('name1','name2','name3')`
+
+## Lesson 1: Running OLS: static model
+
+What is the difference between a *dynamic* or a *static* model?
+
+A *static* model assumes that the impact of any given variable is only effecting the outcome today, whereas *dynamic* implies that the variable impacts the outcome tomorrow. Let's take a look at this:
+
+Let's try to estimate the following static model:
+
+`rGDP = B0 + B1*CPI + B2*Employment u_t`
+
+To do this in R is straightfoward, we can use the `lm` command.
+
+```{r}
+static_model = lm(rGDP ~PAYEMS_PC1 + CPIAUCSL_PC1 ,data=freddat)
+tidy(static_model)
+```
+
+What does this say? Well first off, it looks like inflation decreases real gdp. Great! Call the central Bank and tell them to stop printing all that money! Back to the gold-standard. Dust off your cowboy hats- [We're gonna go find mr. pocket.](https://www.youtube.com/watch?v=WUUytUkMGO0) Spoiler warning if you haven't seen The Ballad of Buster Scruggs.
+
+Also, employment increases rgdp! 
+
+Hold on a minute, let's put our economists hats back on. Why would contemporary inflation decrease **REAL** GDP?
+
+Maybe we have a different story here if we introduce dynamics to our model.
+
+## Lesson 2: Dynamic version, estimating a dynamic model
+
+Now suppose you believe real gdp percent change from last period might depend on the rgdp from today and yesterday.In other words, we are are interested in estimating the following model:
+
+`rGDP_t = B0+B1employment_t+ B2employment_t-1 + + B3employment_t-2 + B4*CPI_t + B5*CPI_t-1 + u_t.`
+
+But why stop at 1 lag for CPI? Maybe there's a longer-lasting impact, so let's go ahead and estimate a model with two lags of CPI as well.
+
+To do this, we need to use a 'lagged' version of CPI and employment, a set of variables which we do not currently have in our data-frame. As a note: lags is just a fancy way of saying a version of a variable from before t.
+
+You have a few options to do this:
+
+ + Create a new variable $employment_{t-1}$ and add it to our dataframe, then do the regression
+ + Run the regression directly. 
+
+Lets run with option one, and then two:
+
+### Option 1
+
+```{r}
+freddat$rgdp_l1 = c(NaN, na.omit(lag(freddat$rGDP,1)))
+freddat$emp_l1 = c(NaN,na.omit(lag(freddat$PAYEMS_PC1,1)))
+freddat$emp_l2 = c(NaN, NaN, na.omit(lag(freddat$PAYEMS_PC1,2)))
+freddat$CPI_l1 = c(NaN, na.omit(lag(freddat$CPIAUCSL_PC1,1)))
+freddat$CPI_l2 = c(NaN, NaN, na.omit(lag(freddat$CPIAUCSL_PC1,2)))
+```
+
+Then you can run your regression by passing these variables into an LM object. Alternatively, you can pass these lagged values directly to aregression object.
+
+### Option 2
+```{r}
+rgdp_1lag = lm(rGDP~ PAYEMS_PC1 + lag(PAYEMS_PC1,1) + 
+                 lag(PAYEMS_PC1, 2) + CPIAUCSL_PC1 + lag(CPIAUCSL_PC1,1),
+               data= freddat)
+
+summary(rgdp_1lag)
+```
+
+So now CPI has no effect? That makes some sense, given we are looking at RGDP. But that's not consistent with our last model. So what happened? Where did our significance on our CPI go? So changes in employment are causing all of our variation now? 
+
+Let's add one more lag of CPI, and see what happens
+
+```{r}
+rgdp_2lag = lm(rGDP~ PAYEMS_PC1 + lag(PAYEMS_PC1,1) + 
+                 lag(PAYEMS_PC1, 2) + CPIAUCSL_PC1 + lag(CPIAUCSL_PC1,1) + lag(CPIAUCSL_PC1,2),
+               data= freddat)
+
+summary(rgdp_2lag)
+```
+
+Okay, this is feeling a bit insane. Maybe we should do a few more tests?
+
+What do we do now? An F-test - by restricting our coefficients on that second lag, we can see how important that lag is!
+
+## Lesson 3: F-tests
+
+Lets run an F-test to compare our two models. To do this in R, we need a regression (lm) object. Let's use rgdp_2lag. For clarity sake, I'll recreate the object below.
+
+```{r}
+rgdp_2lag = lm(rGDP~ PAYEMS_PC1 + lag(PAYEMS_PC1,1) + lag(PAYEMS_PC1, 2) + 
+                 CPIAUCSL_PC1 + lag(CPIAUCSL_PC1,1) + lag(CPIAUCSL_PC1,2),
+               data= freddat)
+```
+
+Now we bring in the lmtest package for waldtest. You can omit the lmtest:: for your purposes, its there just to explicitly state which package the command uses
+
+lmtest::waldtest(rgdp_2lag,c("lag(CPIAUCSL_PC1, 2)"), test="F")
+
+Now, on your own, using one of the techniques describes above I want you to estimate the model above, replacing CPI with a lag of rGDP:
+
+`rGDP_t = B0+B1*CPI_t+B2*CPI_t-1+B2*Employment_t + B3*Employment_t-1 + B4*Employment_t-2 + a1*rGDP_t-1+u_t`
+
+### How to do this:
+
+
+
+```{r}
+rgdp_rgdplag = lm(rGDP~ PAYEMS_PC1 + lag(PAYEMS_PC1,1) + lag(PAYEMS_PC1, 2) + 
+                 lag(rGDP,1),data= freddat)
+tidy(rgdp_rgdplag)
+```
+
+
+
+### Lesson 3.5: What is the deal with F-tests?
+
+F-tests are all about understanding the *joint explanatory power* of a set of regressors. It is feasible that some regressors work better than others when explaining an outcome variable, and this test helps us decide which combinations of variables are "best". Recall the formula for the F-stat:
+
+`F = ((SSR_r-SSR_u)/q)/(SSR_u)/(n-p))`
+
+ - SSR_r is the sum of squared residuals from the **restricted model**, ie the model with less covariates (it is called restricted because you have forced the coefficients on the covariates you leave out to 0).
+ - $SSR_u$ is from the unrestricted model
+ - q is the number of restrictions This is just a normalization
+ - n-p is the number of observations - the number of parameters in the restricted model
+
+Remember: the null hypothesis for the F-test is:
+
+`Null Hypothesis: B0=B1=....=Bk=0`
+
+Alternative Hypothesis: Not the null hypothesis, but what does that mean? At least one of `{B0,B1,B2....Bk}` != 0
+
+So in words: our null hypothesis is that the "restricted model" is the true model, and the alternative hypothesis is that it is not.
+
+Let's look at these piece by piece.
+
+ - SSR_r-SSR_u: Basically tells us how much we benefit (or lose) from using the restricted model over the unrestricted model. 
+
+ - We divide this by the (normalized) unrestricted model. So basically the ratio you are taking is the ratio of the loss of fit from the restricted model to the benefit from the unrestricted model. 
+
+ - If the numerator (the benefit) is not very large relative to the denominator, the F-stat will be small (and we are *less likely* to reject the null in favor of the alternative). 
+
+ - If on the other hand the numerator is large relative to the denominator, the F-stat will be large as well. We would be *more likely* to reject the null.
+
+
+
+## Lesson 3: Visual inspection for Autocorrelation
+
+Okay, so maybe we want to construct the plots with the residuals from the model in part 1. First lets add residuals to the dataframe:
+
+First, we can use the `resid` command to extract `residuals` from an `lm` object and then store them in our `dataframe`
+
+```{r}
+freddat$e_static<- c(resid(static_model))
+```
+
+We also want to graph these against *lagged* residuals, so, we can use the lag command to add lagged residuals as well
+
+```{r}
+freddat$e_static_lag <- c(lag(resid(static_model)))
+```
+
+Now lets plot our static model's residuals against 'lagged' last-period residuals using ggplot2 to inspect visually for any poorly behaved error terms
+
+```{r}
+plot_1 = ggplot(freddat)+
+  geom_point(aes(x=Time,y=e_static), col = "red1") +
+  labs(
+    title =  "Residual Plot: Static Model",
+    x= "Quarter",
+    y= "Residuals")+
+  theme_classic()
+
+plot_2 = ggplot(freddat)+
+  geom_point(aes(x=e_static_lag,y=e_static), col = "red1") +
+  labs(
+    title =  "Residual Plot: Static Model",
+    x= "Lagged Residuals",
+    y= "Residuals")+
+  theme_classic()
+
+plot_1
+
+plot_2
+```
+
+
+We have some evidence here that our errors MIGHT be related over time. This isn't decisive, but we will come back to these plots to examine our data.
+
+Okay, now we need to repeat the plots from above for the set of dynamic models from earlier. 
+
+We can first create the residuals from our dynamic models and then examine them closely.
+
+### Create Residuals for dynamic models
+
+ - Residuals for model with 1 lag
+
+```{r}
+freddat$e_1lag = c(NaN,NaN,residuals(rgdp_1lag))
+freddat$e_1lag_lag = lag(freddat$e_1lag, 1)
+```
+
+
+ - residuals from model with 2 lags
+
+```{r}
+freddat$e_2lags <- c(NaN, NaN, resid(rgdp_2lag))
+freddat$e_2lags_lag <- c(NaN, NaN, lag(resid(rgdp_2lag)))
+```
+
+ - Residuals from model with lagged rgdp included
+
+```{r}
+freddat$e_rgdplag <- c(NaN,NaN,resid(rgdp_rgdplag))
+freddat$e_rgdplag_lag <- c(NaN,NaN,lag(resid(rgdp_rgdplag)))
+```
+
+Why would we need these `NaN` values at the beginning of our vector. Try excluding them and see what happens.
+
+Now, we want to plot the residuals for our two sets of lag types
+
+### Plot Residual for dynamic models
+
+ - create plots for 1 lag residuals
+```{r}
+plot_3 = ggplot(freddat)+
+  geom_point(aes(x=Time,y=e_1lag), col = "red1") +
+  theme_classic()
+
+plot_4 = ggplot(freddat)+
+  geom_point(aes(x=e_1lag_lag,y=e_1lag), col = "red1") +
+  theme_classic()
+```
+
+ - create plots for 2 lag residuals
+```{r}
+plot_5 = ggplot(freddat)+
+  geom_point(aes(x=Time,y=e_2lags), col = "red1") +
+  theme_classic()
+
+plot_6 = ggplot(freddat)+
+  geom_point(aes(x=e_2lags_lag ,y=e_2lags), col = "red1") +
+  theme_classic()
+```
+
+ - create plots for rgdp and 2 lag residuals
+
+```{r}
+plot_7 <- ggplot(freddat) +
+  geom_point(aes(x=Time,y=e_rgdplag), col = "red1") +
+  theme_classic()
+
+plot_8 <- ggplot(freddat) +
+  geom_point(aes(x=e_rgdplag_lag ,y=e_rgdplag), col = 'red1') +
+  theme_classic()
+
+plot_3
+plot_4
+
+plot_5
+plot_6
+
+plot_7
+plot_8
+```
+
+
+
+These models pretty much show the exact same patterns of variation. What does that say about our choice of variables? What could we be exluding from our model That would be useful in preventing this small negative relationship? or does this look like something we can live with, and how would we check? 
+
+When you guys get to your homework, you'll get another chance to try and determine autocorrelation.
+
+Let's see if there is any relationship between errors and their lags in our static model. Our first stab will be to look at a regression of lagged errors on current errors.
+
+```{r}
+summary(lm(data = freddat,e_static ~ e_static_lag))
+```
+
+ew.
+
+## Lesson 4: Testing for Autocorrelation
+
+Lets test our **static model** for second order autocorrelation, which means we get to use the Breusch-Godfrey test you learned about in class.. 
+To do this we will need to follow a few steps. We need to estimate:
+
+`u_t = B0+B1*CPI_t+ B2*Employment_t + u_t + u_t-1 + u_t-2`
+
+What terms would we want to test to determine second-order autocorrelation?
+
+The **null hypothesis** is:
+H0: r_1= r_2 =0
+
+What is the alternative hypothesis? Rather, what are we interested in?
+
+We want to know if *lagged error terms* explain current error terms
+
+Once we have this regression we will take the residual model Rsq and compute the LM stat as we did before: LM = n*Rsq. We can then use this to get a p-value from a chisquared distribution. Lucky for you, there's a command from the `lmtest` package: `waldtest` that will do the heavy lifting for us.Ok, lets get on with the test:
+
+### Let's create the lagged residuals
+
+```{r}
+freddat$e_static_lag <- lag(resid(static_model), 1)
+freddat$e_static_lag2 <- lag(resid(static_model), 2)
+```
+
+### Now, we can run the regression outlined above
+
+```{r}
+bg_mod <- lm(data = freddat, resid(static_model) ~ CPIAUCSL_PC1 + PAYEMS_PC1 + e_static_lag + e_static_lag2)
+summary(bg_mod)
+```
+
+
+### Now, we can run the test. 
+
+This will be an F-test where we're dropping our autocorrelated error terms, so let's do that here:
+
+```{r}
+waldtest(bg_mod, c("e_static_lag", "e_static_lag2"), terms = 2)
+```
+
+So it looks like we have evidence of second order autocorrelation in our static model
+
+
+## CREATE YOUR OWN MODEL
+I want to challenge you guys to find the best model you can that explains percent change from last period in rGDP, given the variables you have to work with. I'd reccommend examining the industrial production variable in particular.
+
+Ok, enjoy memorial day weekend, and we'll see you next week!
