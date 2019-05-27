@@ -47,6 +47,7 @@ Some Useful Resources:
  - Work with FRED data to examine autocorrelation, test for different data structures, and understanding the `lag`/`waldtest` commands.
  
  **Lab 9**: TBD
+ - Having fun with 2SLS and endogeneity
  
  **Lab 10**: Final review material, with practice prepared in advance.
 
