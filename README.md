@@ -49,6 +49,9 @@ Some Useful Resources:
  **Lab 9**: Instrumental Variables (IV), Two-stage Least-Squares (2SLS) and other acronyms.
  - A soft introduction to Instrumental Variable estimation (IV). Using the `AER` package, try out 2SLS on education/wage data.
  
+ **Lab 9_5**: Homework Help: Problem Set 4
+  - Review of material for PS4. Simulate a stationary process, and run two stage least squares on data.
+ 
  **Lab 10**: Final review material, with practice prepared in advance.
 
 A note: I owe a great debt of gratitude to John Morehouse, Alex Li, and of course Ed Rubin for laying the foundations of the lab work for me to build notes off of.
