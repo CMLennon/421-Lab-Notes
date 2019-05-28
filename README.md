@@ -46,8 +46,8 @@ Some Useful Resources:
  **Lab 8**: [What We actually did in Lab](https://github.com/CMLennon/421-Lab-Notes/blob/master/Lab8Notes/Lab8Notes.md), alternatively, [link 2](http://rpubs.com/Clennon/Lab8)
  - Work with FRED data to examine autocorrelation, test for different data structures, and understanding the `lag`/`waldtest` commands.
  
- **Lab 9**: TBD
- - Having fun with 2SLS and endogeneity
+ **Lab 9**: 
+ - A soft introduction to Instrumental Variable estimation (IV). Using the `AER` package, try out 2SLS on education/wage data.
  
  **Lab 10**: Final review material, with practice prepared in advance.
 
