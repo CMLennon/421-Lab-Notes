@@ -53,6 +53,7 @@ Some Useful Resources:
   - Review of material for PS4. Simulate a stationary process, and run two stage least squares on data.
  
  **Lab 10**: Final review material, with practice prepared in advance.
+  - Good luck on your final exam!
 
 A note: I owe a great debt of gratitude to John Morehouse, Alex Li, and of course Ed Rubin for laying the foundations of the lab work for me to build notes off of.
 
