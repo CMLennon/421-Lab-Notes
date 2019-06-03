@@ -50,7 +50,7 @@ Some Useful Resources:
  - A soft introduction to Instrumental Variable estimation (IV). Using the `AER` package, try out 2SLS on education/wage data.
  
  **Lab 9_5**: [Homework Help: Problem Set 4](http://rpubs.com/Clennon/501614)
-  - Review of material for PS4. Simulate a stationary process, and run two stage least squares on data.
+  - Review of material for PS4. Simulate a stationary process.
  
  **Lab 10**: Final review material, with practice prepared in advance.
   - Good luck on your final exam!
