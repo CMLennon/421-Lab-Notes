@@ -57,6 +57,8 @@ Some Useful Resources:
 
 A note: I owe a great debt of gratitude to John Morehouse, Alex Li, and of course Ed Rubin for laying the foundations of the lab work for me to build notes off of.
 
+[Final Review Questions (No Answers Provided)](https://raw.githack.com/edrubin/EC421W19/master/Final/Review/final_review.pdf)
+
 An aside:
 
 If you're adventurous, Grant McDermott's data science for economists is an amazing resource. It's designed for PhD students, but not those with any experience with computers. If metrics is your calling, you might enjoy looking at these.
