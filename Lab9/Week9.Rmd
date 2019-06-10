@@ -243,9 +243,11 @@ Okay, now lets implement 2SLS
 
 #### Stage 1:
 
+**Note: in an earlier stage of these notes, I mistakenly forgot to include the control variables in the first stage, which is an important step. If you do this, this should produce the same results in both regressions.**
+
 ```{r}
 #regress education on distance from a place of higher ed
-stage_one <- lm(education~distance, data=wage_data)
+stage_one <- lm(education~distance + urban + gender + ethnicity + unemp + income, data=wage_data)
 ```
 
 #### check relevance

@@ -303,10 +303,12 @@ Okay, now lets implement 2SLS
 
 #### Stage 1:
 
+**Note: in an earlier stage of these notes, I mistakenly forgot to include the control variables in the first stage, which is an important step. If you do this, this should produce the same results in both regressions.**
+
 
 ```r
 #regress education on distance from a place of higher ed
-stage_one <- lm(education~distance, data=wage_data)
+stage_one <- lm(education~distance + urban + gender + ethnicity + unemp + income, data=wage_data)
 ```
 
 #### check relevance
@@ -318,22 +320,29 @@ summary(stage_one)
 ```
 ## 
 ## Call:
-## lm(formula = education ~ distance, data = wage_data)
+## lm(formula = education ~ distance + urban + gender + ethnicity + 
+##     unemp + income, data = wage_data)
 ## 
 ## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -1.9386 -1.7935 -0.6483  2.0686  4.4968 
+##    Min     1Q Median     3Q    Max 
+## -2.679 -1.564 -0.465  1.479  4.691 
 ## 
 ## Coefficients:
-##             Estimate Std. Error t value Pr(>|t|)    
-## (Intercept) 13.93861    0.03290 423.683  < 2e-16 ***
-## distance    -0.07258    0.01127  -6.441  1.3e-10 ***
+##                    Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)       13.678428   0.085939 159.165  < 2e-16 ***
+## distance          -0.072826   0.012045  -6.046 1.60e-09 ***
+## urbanyes          -0.035527   0.063884  -0.556   0.5782    
+## genderfemale       0.015520   0.050790   0.306   0.7599    
+## ethnicityafam     -0.403432   0.071541  -5.639 1.81e-08 ***
+## ethnicityhispanic -0.144992   0.067187  -2.158   0.0310 *  
+## unemp              0.016602   0.009586   1.732   0.0833 .  
+## incomehigh         0.794369   0.057067  13.920  < 2e-16 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## Residual standard error: 1.782 on 4737 degrees of freedom
-## Multiple R-squared:  0.008683,	Adjusted R-squared:  0.008474 
-## F-statistic: 41.49 on 1 and 4737 DF,  p-value: 1.301e-10
+## Residual standard error: 1.735 on 4731 degrees of freedom
+## Multiple R-squared:  0.06142,	Adjusted R-squared:  0.06003 
+## F-statistic: 44.23 on 7 and 4731 DF,  p-value: < 2.2e-16
 ```
 
 Great. Looks like we're relevant! (why?)
@@ -406,15 +415,15 @@ summary(stage_two, robust = TRUE)
 ## -3.1816 -0.8702  0.1452  0.8464  3.8382 
 ## 
 ## Coefficients:
-##                    Estimate Std. Error t value Pr(>|t|)    
-## (Intercept)       -1.597926   1.677315  -0.953 0.340806    
-## urbanyes          -0.002389   0.046433  -0.051 0.958970    
-## genderfemale      -0.078778   0.036917  -2.134 0.032897 *  
-## ethnicityafam     -0.542682   0.051999 -10.436  < 2e-16 ***
-## ethnicityhispanic -0.503494   0.048834 -10.310  < 2e-16 ***
-## unemp              0.147056   0.006967  21.107  < 2e-16 ***
-## x_hat              0.736239   0.120626   6.103 1.12e-09 ***
-## incomehigh         0.156674   0.041479   3.777 0.000161 ***
+##                   Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)       -1.37169    1.64027  -0.836 0.403053    
+## urbanyes           0.02368    0.04540   0.522 0.602032    
+## genderfemale      -0.09017    0.03698  -2.438 0.014804 *  
+## ethnicityafam     -0.24668    0.06992  -3.528 0.000423 ***
+## ethnicityhispanic -0.39711    0.05252  -7.562 4.75e-14 ***
+## unemp              0.13487    0.00669  20.160  < 2e-16 ***
+## x_hat              0.73370    0.12021   6.103 1.12e-09 ***
+## incomehigh        -0.42616    0.10724  -3.974 7.18e-05 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
