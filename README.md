@@ -46,6 +46,8 @@ Some Useful Resources:
  **Lab 8**: [What We actually did in Lab](https://github.com/CMLennon/421-Lab-Notes/blob/master/Lab8Notes/Lab8Notes.md), alternatively, [link 2](http://rpubs.com/Clennon/Lab8)
  - Work with FRED data to examine autocorrelation, test for different data structures, and understanding the `lag`/`waldtest` commands.
  
+ **Mistake was caught in lab 9:** When estimating 2SLS in IV manually, you need to include all variables when estimating your first stage. 
+ 
  **Lab 9**: [Instrumental Variables (IV), Two-stage Least-Squares (2SLS) and other acronyms](https://github.com/CMLennon/421-Lab-Notes/blob/master/Lab9/Week9.md), alternatively, [link 2](http://rpubs.com/Clennon/Lab9)
  - A soft introduction to Instrumental Variable estimation (IV). Using the `AER` package, try out 2SLS on education/wage data.
  
