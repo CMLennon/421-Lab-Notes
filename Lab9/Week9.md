@@ -81,9 +81,9 @@ Think of these like so:
 
 Our problem, with a series of instruments:
 
-![](/Users/connor/Dropbox/EC421_Lab/week9/Week9_files/venn_iv-1.png)
+![](Lab9/Lab9_files/venn_iv-1.png)
 
-![](/Users/connor/Dropbox/EC421_Lab/week9/Week9_files/venn_iv_endog-1.png)
+![]()
 
 ![](/Users/connor/Dropbox/EC421_Lab/week9/Week9_files/venn_iv_irrelevant-1.png)
 
