@@ -81,13 +81,13 @@ Think of these like so:
 
 Our problem, with a series of instruments:
 
-![](Lab9/Lab9_files/venn_iv-1.png)
+![Initial](Lab9/Lab9_files/venn_iv-1.png)
 
-![]()
+![endogenous](Lab9/Lab9_files/venn_iv_endog-1.png)
 
-![](/Users/connor/Dropbox/EC421_Lab/week9/Week9_files/venn_iv_irrelevant-1.png)
+![not relevant](/Users/connor/Dropbox/EC421_Lab/week9/Week9_files/venn_iv_irrelevant-1.png)
 
-![](/Users/connor/Dropbox/EC421_Lab/week9/Week9_files/venn_iv_endog2-1.png)
+![emdogenous](/Users/connor/Dropbox/EC421_Lab/week9/Week9_files/venn_iv_endog2-1.png)
 
 Let's look at an example, one you talked about a bit in class.
 
