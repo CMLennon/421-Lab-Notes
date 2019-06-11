@@ -54,7 +54,7 @@ Some Useful Resources:
  **Lab 9_5**: [Homework Help: Problem Set 4](http://rpubs.com/Clennon/501614)
   - Review of material for PS4. Simulate a stationary process.
  
- **Lab 10**: Final review material, with practice prepared in advance.
+ **Lab 10**: [Final review material, with practice prepared in advance.](http://rpubs.com/Clennon/FinalReview)
   - Good luck on your final exam!
 
 A note: I owe a great debt of gratitude to John Morehouse, Alex Li, and of course Ed Rubin for laying the foundations of the lab work for me to build notes off of.
