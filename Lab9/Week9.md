@@ -70,24 +70,26 @@ Now, assuming we can  manipulate this new variable, we can see how differing lev
 2. Relevance - it is correlated with x
 
 
-Let's draw a venn diagram. This helps solidify the true idea of IV. These I've borrowed unceremoniously from MY graduate metrics professor Glenn Waddell. He's the first person I've seen do this type of explanation for IV.
+Let's draw a venn diagram. This helps solidify the true idea of IV. These I've borrowed unceremoniously from MY graduate metrics professor Glenn Waddell.
+
+He's the first person I've seen do this type of explanation for IV, though Ed has also done diagrams of this form for you in the notes.
 
 
 Think of these like so:
 
  - each circle illustrates a variable
- - overlap gives the share of correlation
- - dotted borders denote omitted variables.
+ - overlap gives the share of correlation between the two variables (really, covariance)
+ - dotted borders denote variables omitted from our equation.
 
 Our problem, with a series of instruments:
 
-![Initial](Lab9/Lab9_files/venn_iv-1.png)
+![Initial](https://pages.uoregon.edu/waddell/metrics/bookdown_files/figure-html/venn_iv-1.png)
 
-![endogenous](Lab9/Lab9_files/venn_iv_endog-1.png)
+![endogenous](https://pages.uoregon.edu/waddell/metrics/bookdown_files/figure-html/venn_iv_endog-1.png)
 
-![not relevant](Lab9/Lab9_files/venn_iv_endog2-1.png)
+![not relevant](https://pages.uoregon.edu/waddell/metrics/bookdown_files/figure-html/venn_iv_irrelevant-1.png)
 
-![emdogenous]()
+![emdogenous](https://pages.uoregon.edu/waddell/metrics/bookdown_files/figure-html/venn_iv_endog2-1.png)
 
 Let's look at an example, one you talked about a bit in class.
 
