@@ -51,6 +51,9 @@ Some Useful Resources:
  **Lab 9**: [Instrumental Variables (IV), Two-stage Least-Squares (2SLS) and other acronyms](https://github.com/CMLennon/421-Lab-Notes/blob/master/Lab9/Week9.md), alternatively, [link 2](http://rpubs.com/Clennon/Lab9)
  - A soft introduction to Instrumental Variable estimation (IV). Using the `AER` package, try out 2SLS on education/wage data.
  
+ - Specifically, if you want a very in depth look at instrumentation outside of your course materials, I would use Glen Waddell's notes
+ [here](https://pages.uoregon.edu/waddell/metrics/instrumental-variables.html). You won't need to know this material, but it's good to know if you want a job in data analysis.
+ 
  **Lab 9_5**: [Homework Help: Problem Set 4](http://rpubs.com/Clennon/501614)
   - Review of material for PS4. Simulate a stationary process.
  
